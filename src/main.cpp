@@ -117,6 +117,11 @@ int main()
     	  double v1  = fusionEKF.ekf_.x_(2);
     	  double v2 = fusionEKF.ekf_.x_(3);
 
+        std::cout << "x: " << p_x << endl;
+        std::cout << "y: " << p_y << endl;
+        std::cout << "vx: " << v1 << endl;
+        std::cout << "vy: " << v2 << endl;
+
     	  estimate(0) = p_x;
     	  estimate(1) = p_y;
     	  estimate(2) = v1;

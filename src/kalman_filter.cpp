@@ -71,7 +71,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 	  	return;
   	}
 
-	float theta = atan(py/px);
+	float theta = atan2(py,px);
 	float ro_dot = (px*vx+py*vy)/rho;
 
 	VectorXd z_pred = VectorXd(3);
@@ -79,6 +79,9 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 	z_pred << rho,theta,ro_dot;
 
 	VectorXd y = z - z_pred;
+
+	//normalizing angles exceeding +/-pi
+	y[1]=atan2(sin(y[1]),cos(y[1]));
 
 	//lesson 5.7
 	MatrixXd Ht = H_.transpose();
